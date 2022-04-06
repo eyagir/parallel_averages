@@ -73,13 +73,13 @@ int main(){
 	 * array size is 0
 	 * array size is less than thread size
 	 */
-	if (numOfThreads == 0) {
-		cout << "Number of threads cannot be 0" << endl;
+	if (numOfThreads <= 0) {
+		cout << "Number of threads cannot be less than or equal to 0" << endl;
 		return 0;
 	}
 
-	if (arr_size == 0) {
-		cout << "The size of the array cannot be 0" << endl;
+	if (arr_size <= 0) {
+		cout << "The size of the array cannot be less than or equal to 0" << endl;
 		return 0;
 	}
 
@@ -88,12 +88,17 @@ int main(){
 		return 0;
 	}
 
-	double* averages= (double*) calloc(numOfThreads, sizeof(double));;
 	double* double_arr = (double*) calloc(arr_size, sizeof(double));
 
 	/* Populate array with dummy numbers */
 	for(int i = 0; i < arr_size; i++) {
 		double_arr[i] = i + 1;
+	}
+
+	/* Return if there was an issue with double_arr creation */ 
+	if (double_arr == NULL) {
+		cout << "Array is null" << endl;
+		return 0;
 	}
 
 	time_t start = clock();
